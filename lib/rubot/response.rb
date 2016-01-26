@@ -8,7 +8,7 @@ module Rubot
       'Ти си шефа',
       'Става',
       'Добре',
-    ].map(&:freeze).freeze
+    ].deep_freeze
 
     INPUT_ERROR = [
       'Ти луд ли си? %s',
@@ -18,14 +18,14 @@ module Rubot
       '%s Я дай пак.',
       'Я дай пак, че нещо не разбрах. %s',
       '%s И ся к\'во прайм?'
-    ].map(&:freeze).freeze
+    ].deep_freeze
 
     ERROR = [
       'Нещо се спекох. `%s`',
       'Стана тя една... `%s`',
       'Счупѝх са нещо, муцка. `%s`',
       'Сбъгясах се. На ти съобщение: `%s`',
-    ].map(&:freeze).freeze
+    ].deep_freeze
 
     def ok
       OK.sample

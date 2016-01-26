@@ -1,6 +1,18 @@
 require 'slack-ruby-bot'
 require 'yaml'
 
+class Array
+  def deep_freeze
+    map do |element|
+      if element.respond_to? :deep_freeze
+        element.deep_freeze
+      else
+        element.freeze
+      end
+    end.freeze
+  end
+end
+
 require 'rubot/version'
 
 require 'rubot/bot'
