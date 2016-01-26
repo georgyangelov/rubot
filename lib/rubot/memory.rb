@@ -13,6 +13,13 @@ module Rubot
       @data = {}
     end
 
+    def for_channel(channel)
+      self[:channels] ||= {}
+      self[:channels][channel.to_s] ||= {}
+
+      self[:channels][channel.to_s]
+    end
+
     def [](*args)
       @data[*args]
     end

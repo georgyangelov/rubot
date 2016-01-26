@@ -4,13 +4,9 @@ module Rubot
       ALIAS_REGEXP = /[щшк]е ти викаме? (?<new_name>[[:alnum:]]+)/.freeze
 
       command ALIAS_REGEXP do |client, data, match|
-        Rubot.remember do |memory|
+        Rubot.remember(data.channel) do |memory|
           memory[:aliases] ||= []
           memory[:aliases] |= [match[:new_name]]
-        end
-
-        SlackRubyBot.configure do |config|
-          config.aliases |= Rubot.memory[:aliases]
         end
 
         client.say channel: data.channel,

@@ -25,6 +25,10 @@ module Rubot
         client.say channel: data.channel,
                    text: INTRODUCE_YOURSELF_RESPONSE
       end
+
+      command(/кажи нещо/) do |client, data, _|
+        client.say channel: data.channel, text: 'нещо'
+      end
     end
   end
 end

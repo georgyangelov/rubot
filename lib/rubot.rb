@@ -46,8 +46,12 @@ module Rubot
     @memory ||= Memory.new(File.join(root, 'config', 'memory.yml'))
   end
 
-  def self.remember
-    yield memory
+  def self.remember(channel = nil)
+    if channel
+      yield memory.for_channel(channel)
+    else
+      yield memory
+    end
 
     memory.save
   end
@@ -57,7 +61,3 @@ module Rubot
 end
 
 ENV['SLACK_API_TOKEN'] = Rubot::SECRETS['slack']['token']
-
-SlackRubyBot.configure do |config|
-  config.aliases = Rubot::CONFIG['aliases'] | (Rubot.memory[:aliases] || [])
-end
