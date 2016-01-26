@@ -10,12 +10,16 @@ module Rubot
         'Хай ^_^',
       ].deep_freeze
 
-      command(/(здравей|здрасти|привет|хай|hi|йо|yo|к'?во става)/) do |client, data, _|
+      command(/(здравей|здрасти|привет|хай|hi|йо|yo)/) do |client, data, _|
         client.say channel: data.channel, text: HELLO_RESPONSES.sample
       end
 
+      command(/к'?во става/) do |client, data, _|
+        client.say channel: data.channel, text: 'К\'во да става бе човек...'
+      end
+
       INTRODUCE_YOURSELF_RESPONSE = 'Здравейте ^_^ Аз съм Рубот. Отговарям на всякакви ' \
-                                    'команди, стига да ме програмирате.'.freeze
+                                    'команди (стига да ме програмирате).'.freeze
 
       command(/(представи се|кой си( ти)?)/) do |client, data, _|
         client.say channel: data.channel,
