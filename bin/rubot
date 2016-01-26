@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
-$:.unshift "#{File.dirname(__FILE__)}/../rubot"
+$:.unshift "#{File.dirname(__FILE__)}/../lib"
 
 require 'rubot'
 
-Rubot.run
+Rubot::Bot.run
