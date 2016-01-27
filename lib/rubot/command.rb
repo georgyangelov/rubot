@@ -5,5 +5,9 @@ module Rubot
 
       listen_for command_matcher, &block
     end
+
+    def self.commands(regexes, &block)
+      regexes.each { |regex| command(regex, &block) }
+    end
   end
 end

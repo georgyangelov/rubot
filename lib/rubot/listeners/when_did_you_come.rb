@@ -11,13 +11,13 @@ module Rubot
         'отивам си',
         'прибирам се',
         'се прибирам',
-        'отивам си',
+        'си отивам',
       ].deep_freeze
 
       LEAVING_REGEXP = /\b(#{LEAVING_MESSAGES.join('|')})\b/i.freeze
 
       listen_for LEAVING_REGEXP do |client, data, match|
-        next if match[0] =~ /дейли/
+        next if match.string =~ /\bдейли\b/i
 
         client.say channel: data.channel,
                    text: 'А ти кога дойде? :clock3:'

@@ -17,6 +17,9 @@ require 'rubot/version'
 
 require 'rubot/bot'
 require 'rubot/memory'
+require 'rubot/key_normalizer'
+require 'rubot/count_parser'
+require 'rubot/natural_lists'
 
 require 'rubot/listener'
 require 'rubot/command'
@@ -26,6 +29,8 @@ require 'rubot/listeners/when_did_you_come'
 
 require 'rubot/commands/alias'
 require 'rubot/commands/ping_pong'
+require 'rubot/commands/remember'
+require 'rubot/commands/randomize_list'
 require 'rubot/commands/unknown'
 
 module SlackRubyBot
