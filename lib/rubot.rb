@@ -18,8 +18,12 @@ require 'rubot/version'
 require 'rubot/bot'
 require 'rubot/memory'
 
+require 'rubot/listener'
 require 'rubot/command'
 require 'rubot/response'
+
+require 'rubot/listeners/when_did_you_come'
+
 require 'rubot/commands/alias'
 require 'rubot/commands/ping_pong'
 require 'rubot/commands/unknown'
@@ -29,7 +33,10 @@ module SlackRubyBot
     module Message
       # Monkey-patch to ensure that our unknown command class is called last
       def command_classes
-        Rubot::Command.descendants -
+        (Rubot::Listener.descendants -
+          Rubot::Command.descendants +
+          Rubot::Command.descendants
+        ).uniq -
           [Rubot::Commands::Unknown] +
           [Rubot::Commands::Unknown]
       end
