@@ -27,6 +27,11 @@ require 'rubot/response'
 
 require 'rubot/listeners/when_did_you_come'
 
+module Rubot
+  cattr_accessor :command_descriptions
+end
+
+require 'rubot/commands/help'
 require 'rubot/commands/alias'
 require 'rubot/commands/ping_pong'
 require 'rubot/commands/remember'

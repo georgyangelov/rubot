@@ -22,6 +22,7 @@ module Rubot
         '%s, това си ти! :niki-kan4ev:',
       ].deep_freeze
 
+      desc 'дай|избери|искам|търся <колко> [от] <какви> [без <кои>]', 'Избира произволни елементи от списък.'
       commands COMMANDS do |client, data, match|
         key = Rubot::KeyNormalizer.normalize(match[:key])
         count = Rubot::CountParser.parse(match[:count].strip)

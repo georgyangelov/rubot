@@ -6,6 +6,8 @@ module Rubot
         /запомни,? че (?<value>.+) (са|сме) (?<key>[[:alnum:]]+)/,
       ].deep_freeze
 
+      desc 'запомни <елементи> като <списък>', 'Запомня списък за текущия канал.'
+      desc 'запомни, че <елементи> са <вид>', 'Запомня списък за текущия канал.'
       commands REMEMBER_LIST_COMMANDS do |client, data, match|
         key = Rubot::KeyNormalizer.normalize(match[:key])
         value = Rubot::NaturalLists.parse(match[:value])

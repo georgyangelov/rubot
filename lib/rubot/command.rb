@@ -9,5 +9,10 @@ module Rubot
     def self.commands(regexes, &block)
       regexes.each { |regex| command(regex, &block) }
     end
+
+    def self.desc(command, description)
+      Rubot.command_descriptions ||= []
+      Rubot.command_descriptions << [command, description]
+    end
   end
 end
