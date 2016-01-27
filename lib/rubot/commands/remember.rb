@@ -8,7 +8,7 @@ module Rubot
 
       commands REMEMBER_LIST_COMMANDS do |client, data, match|
         key = Rubot::KeyNormalizer.normalize(match[:key])
-        value = Rubot::NaturalListParser.parse(match[:value])
+        value = Rubot::NaturalLists.parse(match[:value])
 
         if value.empty?
           client.say channel: data.channel,

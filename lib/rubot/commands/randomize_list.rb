@@ -2,7 +2,7 @@ module Rubot
   module Commands
     class RandomizeList < Command
       COMMANDS = [
-        /(дай|избери|искам|търся) (?<count>[[:alnum:]]+)( от)? (?<key>[[:alnum:]]+)/,
+        /(дай|избери|искам|търся) (?<count>[[:alnum:]]+)( от)? (?<key>[[:alnum:]]+)( без (?<except>.+?))?/,
       ].deep_freeze
 
       RESPONSES = [
@@ -52,6 +52,18 @@ module Rubot
           client.say channel: data.channel,
                      text: Response.input_error("Няма никой от `#{match[:key]}`.")
           next
+        end
+
+        if match[:except]
+          except = Rubot::NaturalLists.parse(match[:except])
+
+          if except.size >= items.size
+            client.say channel: data.channel,
+                       text: 'Избрах празното множество.'
+            next
+          end
+
+          items -= except
         end
 
         chosen_items = items.sample(count)
