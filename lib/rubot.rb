@@ -60,7 +60,7 @@ module Rubot
   end
 
   def self.memory
-    @memory ||= Memory.new(File.join(root, 'config', 'memory.yml'))
+    @memory ||= Memory.new(File.join(root, 'data', 'memory.yml'))
   end
 
   def self.remember(channel = nil)
