@@ -1,7 +1,7 @@
 module Rubot
   module NaturalLists
     def self.parse(string)
-      string.split(/,|и/i).map(&:strip).compact
+      string.split(/,|\bи\b/i).map(&:strip).compact
     end
 
     def self.construct(items)
