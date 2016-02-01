@@ -2,7 +2,7 @@ module Rubot
   module Commands
     class RandomizeList < Command
       COMMANDS = [
-        /(дай|избери|искам|търся) (?<count>[[:alnum:]]+)( от)? (?<key>[[:alnum:]]+)( без (?<except>.+?))?/,
+        /(дай|избери|искам|търся) (?<count>[[:alnum:]]+)?( от)? (?<key>[[:alnum:]]+)( без (?<except>.+?))?/,
       ].deep_freeze
 
       RESPONSES = [
@@ -25,7 +25,12 @@ module Rubot
       desc 'дай|избери|искам|търся <колко> [от] <какви> [без <кои>]', 'Избира произволни елементи от списък.'
       commands COMMANDS do |client, data, match|
         key = Rubot::KeyNormalizer.normalize(match[:key])
-        count = Rubot::CountParser.parse(match[:count].strip)
+
+        if match[:count]
+          count = Rubot::CountParser.parse(match[:count].strip)
+        else
+          count = 1
+        end
 
         unless count
           client.say channel: data.channel,

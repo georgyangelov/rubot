@@ -7,12 +7,6 @@ module Rubot
       @data = load
     end
 
-    def load
-      @data = YAML.load_file(@file_path) || {}
-    rescue Errno::ENOENT
-      @data = {}
-    end
-
     def for_channel(channel)
       self[:channels] ||= {}
       self[:channels][channel.to_s] ||= {}
@@ -30,6 +24,14 @@ module Rubot
 
     def save
       File.write(@file_path, YAML.dump(@data))
+    end
+
+    private
+
+    def load
+      YAML.load_file(@file_path) || {}
+    rescue Errno::ENOENT
+      {}
     end
   end
 end

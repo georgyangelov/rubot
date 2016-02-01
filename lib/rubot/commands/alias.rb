@@ -1,10 +1,13 @@
 module Rubot
   module Commands
     class Alias < Command
-      ALIAS_REGEXP = /[щшк]е ти викаме? (?<new_name>[[:alnum:]]+)/.freeze
+      ALIAS_REGEXPS = [
+        /[щшк]е ти викаме? (?<new_name>[[:alnum:]]+)/i,
+        /[щшк]е те наричаме? (?<new_name>[[:alnum]]+)/i,
+      ].deep_freeze
 
-      desc 'ще ти викам <име>', 'Започва да отговаря на това име.'
-      command ALIAS_REGEXP do |client, data, match|
+      desc 'ще ти викам <име> | ще те наричам <име>', 'Започва да отговаря на това име.'
+      commands ALIAS_REGEXPS do |client, data, match|
         Rubot.remember(data.channel) do |memory|
           memory[:aliases] ||= []
           memory[:aliases] |= [match[:new_name]]
