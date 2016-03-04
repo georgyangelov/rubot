@@ -4,7 +4,7 @@ WORKDIR /rubot
 
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
-RUN bundle install
+RUN bundle install --without=test
 
 COPY . /rubot
 
