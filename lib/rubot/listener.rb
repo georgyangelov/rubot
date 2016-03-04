@@ -19,6 +19,7 @@ module Rubot
       self.finalize_routes!
 
       expression, text = parse(client, data)
+      expression = expression.strip.gsub(/\s+/, ' ')
       called = false
 
       routes.each_pair do |route, method|

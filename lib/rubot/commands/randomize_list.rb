@@ -2,7 +2,7 @@ module Rubot
   module Commands
     class RandomizeList < Command
       COMMANDS = [
-        /(дай|избери|искам|търся) (?<count>[[:alnum:]]+)?( от)? (?<key>[[:alnum:]]+)( без (?<except>.+?))?/,
+        /(дай|избери|искам|търся)( (?<count>[[:alnum:]]+))?( от)? (?<key>[[:alnum:]]+)( без (?<except>.+?))?/,
       ].deep_freeze
 
       RESPONSES = [
