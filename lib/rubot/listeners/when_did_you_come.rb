@@ -16,12 +16,13 @@ module Rubot
 
       LEAVING_REGEXP = /\b(#{LEAVING_MESSAGES.join('|')})\b/i.freeze
 
-      listen_for LEAVING_REGEXP do |client, data, match|
-        next if match.string =~ /\bдейли\b/i
-
-        client.say channel: data.channel,
-                   text: 'А ти кога дойде? :clock3:'
-      end
+      # Disabled for now...
+      # listen_for LEAVING_REGEXP do |client, data, match|
+      #   next if match.string =~ /\bдейли\b/i
+      #
+      #   client.say channel: data.channel,
+      #              text: 'А ти кога дойде? :clock3:'
+      # end
     end
   end
 end
