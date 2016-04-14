@@ -11,11 +11,11 @@ module Rubot
       ].deep_freeze
 
       desc 'здравей', 'Поздрав. Трябва да сме учтиви.'
-      command(/(здравей|здрасти|привет|хай|hi|йо|yo)/) do |client, data, _|
+      command(/(здравей|здрасти|привет|хай|hi|йо|yo)/i) do |client, data, _|
         client.say channel: data.channel, text: HELLO_RESPONSES.sample
       end
 
-      command(/(к'?во|какво) става/) do |client, data, _|
+      command(/(к'?во|какво) става/i) do |client, data, _|
         client.say channel: data.channel, text: 'К\'во да става бе човек...'
       end
 
@@ -28,7 +28,7 @@ module Rubot
       ].deep_freeze
 
       desc 'как си', 'Трябва да се интересуваме от приятелите си.'
-      command(/как си/) do |client, data, _|
+      command(/как си/i) do |client, data, _|
         client.say channel: data.channel, text: HOW_ARE_YOU_RESPONSES.sample
       end
 
@@ -44,7 +44,7 @@ module Rubot
       ].deep_freeze
 
       desc 'какво правиш', 'Какъв ли е ботския живот?'
-      command(/(к'?во|какво) правиш/) do |client, data, _|
+      command(/(к'?во|какво) правиш/i) do |client, data, _|
         client.say channel: data.channel, text: WHAT_ARE_YOU_DOING_RESPONSES.sample
       end
 
@@ -53,7 +53,7 @@ module Rubot
         'За повече информация ме питайте за помощ (`<име>, хелп?`).'.freeze
 
       desc 'представи се', ''
-      command(/(представи се|кой си( ти)?)/) do |client, data, _|
+      command(/(представи се|кой си( ти)?)/i) do |client, data, _|
         names = Rubot::Bot.names(data.channel)
         natural_names = Rubot::NaturalLists.construct(names)
 
@@ -62,7 +62,7 @@ module Rubot
       end
 
       desc 'кажи нещо', 'Казва нещо.'
-      command(/кажи нещо/) do |client, data, _|
+      command(/кажи нещо/i) do |client, data, _|
         client.say channel: data.channel, text: 'нещо'
       end
     end

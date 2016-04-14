@@ -1,8 +1,8 @@
 module Rubot
   module Commands
     class Help < Rubot::Command
-      COMMAND = /(помощ|помогни( ми)?|хелп|help)/
-      COMMAND_CODE = /(къде ти е кода|дай( си)? кода)/
+      COMMAND = /(помощ|помогни( ми)?|хелп|help)/i
+      COMMAND_CODE = /(къде ти е кода|дай( си)? кода)/i
 
       desc 'помощ', 'Принтира това съобщение'
       command COMMAND do |client, data, _|

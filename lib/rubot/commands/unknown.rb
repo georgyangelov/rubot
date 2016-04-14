@@ -1,9 +1,9 @@
 module Rubot
   module Commands
     class Unknown < Rubot::Command
-      NO_COMMAND = /\s*/.freeze
-      ARE_YOU_HERE_COMMAND = /(тука? ли си|тук\?)/.freeze
-      UNKNOWN_COMMAND = /(?<command>.*)/.freeze
+      NO_COMMAND = /\s*/i.freeze
+      ARE_YOU_HERE_COMMAND = /(тука? ли си|тук\?)/i.freeze
+      UNKNOWN_COMMAND = /(?<command>.*)/i.freeze
 
       NO_COMMAND_RESPONSES = [
         'Тук съм.',
