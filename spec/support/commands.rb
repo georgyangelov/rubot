@@ -3,6 +3,11 @@ module CommandHelpers
     Rubot::CONFIG['aliases'] = ['бот', 'боте']
   end
 
+  def tell(command, channel: 'channel', **options)
+    ask command, channel: channel, **options
+    expect_ok_answer channel: channel
+  end
+
   def ask(command, channel: 'channel', prefix: true)
     client = Rubot::Bot.instance.send(:client)
 

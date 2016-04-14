@@ -27,6 +27,58 @@ module Rubot
                    text: Response.ok
       end
 
+      REMOVE_FROM_LIST_COMMANDS = [
+        /(пре)?махни (?<value>.+) от (?<key>[[:alnum:]]+)/i,
+        /(?<value>.+) не (е|са) (?<key>[[:alnum:]]+)/i,
+      ].deep_freeze
+
+      desc '<елементи> не е/са <списък>', 'Добавя елементи към списък'
+      commands REMOVE_FROM_LIST_COMMANDS do |client, data, match|
+        key = Rubot::KeyNormalizer.normalize(match[:key])
+        value = Rubot::NaturalLists.parse(match[:value])
+
+        if value.empty?
+          client.say channel: data.channel,
+                     text: Response.input_error("Нещо не е наред в `#{match[:value]}`.")
+          next
+        end
+
+        Rubot.remember(data.channel) do |memory|
+          memory[:lists] ||= {}
+          memory[:lists][key] ||= []
+          memory[:lists][key] = memory[:lists][key] - value
+        end
+
+        client.say channel: data.channel,
+                   text: Response.ok
+      end
+
+      ADD_TO_LIST_COMMANDS = [
+        /добави (?<value>.+) към (?<key>[[:alnum:]]+)/i,
+        /(?<value>.+) (е|са) (?<key>[[:alnum:]]+)/i,
+      ].deep_freeze
+
+      desc '<елементи> е/са <списък>', 'Добавя елементи към списък'
+      commands ADD_TO_LIST_COMMANDS do |client, data, match|
+        key = Rubot::KeyNormalizer.normalize(match[:key])
+        value = Rubot::NaturalLists.parse(match[:value])
+
+        if value.empty?
+          client.say channel: data.channel,
+                     text: Response.input_error("Нещо не е наред в `#{match[:value]}`.")
+          next
+        end
+
+        Rubot.remember(data.channel) do |memory|
+          memory[:lists] ||= {}
+          memory[:lists][key] ||= []
+          memory[:lists][key] = (memory[:lists][key] + value).uniq
+        end
+
+        client.say channel: data.channel,
+                   text: Response.ok
+      end
+
       SHOW_LIST_COMMANDS = [
         /покажи (?<key>[[:alnum:]]+)/i,
         /(кои|кой) (са|е) (?<key>[[:alnum:]]+)/i,
