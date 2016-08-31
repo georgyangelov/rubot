@@ -26,6 +26,7 @@ require 'rubot/command'
 require 'rubot/response'
 
 require 'rubot/listeners/when_did_you_come'
+require 'rubot/listeners/doynovski_reaction'
 
 module Rubot
   cattr_accessor :command_descriptions

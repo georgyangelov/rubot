@@ -28,7 +28,7 @@ GEM
       faraday_middleware (~> 0.9)
       faraday_middleware-parse_oj (~> 0.3)
       launchy (~> 2.4)
-    gli (2.13.4)
+    gli (2.14.0)
     hashdiff (0.2.3)
     hashie (3.4.3)
     i18n (0.7.0)
@@ -61,10 +61,12 @@ GEM
       giphy (~> 2.0.2)
       hashie
       slack-ruby-client (>= 0.5.0)
-    slack-ruby-client (0.5.4)
+    slack-ruby-client (0.7.5)
+      activesupport
       faraday
       faraday_middleware
       gli
+      hashie
       json
       websocket-driver
     thread_safe (0.3.5)
@@ -75,7 +77,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
-    websocket-driver (0.6.3)
+    websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
 
@@ -90,4 +92,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.11.2
+   1.12.5

@@ -1,5 +1,9 @@
 module Rubot
   class Listener < SlackRubyBot::Commands::Base
+    def self.pass_through
+      @pass_through = true
+    end
+
     def self.listen_for(regex)
       match regex do |client, data, match|
         begin
@@ -44,7 +48,7 @@ module Rubot
         break
       end
 
-      called
+      called && !@pass_through
     end
   end
 end

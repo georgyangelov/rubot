@@ -1,3 +1,16 @@
 aliases:
   - майсторе
   - баце
+
+reactions:
+  livelist-dev:
+    zvalcheva:
+      - designer
+
+  random-bot-test:
+    rvarbanov:
+      - maznia
+      - partyparrot
+
+    gangelov:
+      - doynovski
