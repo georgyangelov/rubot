@@ -1,5 +1,6 @@
 require 'slack-ruby-bot'
 require 'yaml'
+require 'mqtt'
 
 class Array
   def deep_freeze
@@ -25,6 +26,8 @@ require 'rubot/listener'
 require 'rubot/command'
 require 'rubot/response'
 
+require 'rubot/http_requests'
+
 require 'rubot/listeners/when_did_you_come'
 
 module Rubot
@@ -36,6 +39,8 @@ require 'rubot/commands/alias'
 require 'rubot/commands/ping_pong'
 require 'rubot/commands/remember'
 require 'rubot/commands/randomize_list'
+require 'rubot/commands/lamp_control'
+require 'rubot/commands/beer_meter'
 require 'rubot/commands/unknown'
 
 module SlackRubyBot
@@ -74,7 +79,7 @@ module Rubot
   end
 
   SECRETS = YAML.load_file(File.join(root, 'config', 'secrets.yml'))
-  CONFIG = YAML.load_file(File.join(root, 'config', 'rubot.yml'))
+  CONFIG  = YAML.load_file(File.join(root, 'config', 'rubot.yml'))
 end
 
 ENV['SLACK_API_TOKEN'] = Rubot::SECRETS['slack']['token']

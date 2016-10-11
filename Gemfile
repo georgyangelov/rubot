@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'slack-ruby-bot'
+gem 'mqtt'
 
 group :test do
   gem 'rspec'
