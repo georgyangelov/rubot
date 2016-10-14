@@ -33,7 +33,7 @@ module Rubot
 
       def self.set_lamps_for_email(client, data, email, switch_on)
         begin
-          url = "#{Rubot::SECRETS['humpty_url']}/office/switches_for_employee?email=#{email}"
+          url = "#{Rubot::SECRETS['humpty_url']}/api/employees/#{email}/switches"
           lamps = HttpRequests.get_json(url)
           lamp_updates = lamps.map { |lamp_id| [lamp_id, switch_on] }.to_h
 
