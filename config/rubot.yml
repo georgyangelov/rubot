@@ -1,3 +1,22 @@
-aliases:
-  - майсторе
-  - баце
+default: &default
+  log_level: debug
+
+  aliases:
+    - майсторе
+    - баце
+
+test:
+  <<: *default
+
+  log_level: debug
+  aliases:
+
+development:
+  <<: *default
+
+  log_level: debug
+
+production:
+  <<: *default
+
+  log_level: debug

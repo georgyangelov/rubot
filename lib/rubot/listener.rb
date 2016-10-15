@@ -3,13 +3,17 @@ module Rubot
     def self.listen_for(regex)
       match regex do |client, data, match|
         begin
+          user    = client.users[data.user].name
+          channel = client.channels[data.channel] || data.channel
+
+          Rubot.logger.debug "Handle '#{data.text}' from @#{user} in ##{channel}"
+
           yield client, data, match
         rescue StandardError => error
           client.say channel: data.channel,
                      text: Response.error(error.message)
 
-          puts error.message
-          puts error.backtrace
+          Rubot.logger.error 'Unknown error while handling message', error
         end
       end
     end

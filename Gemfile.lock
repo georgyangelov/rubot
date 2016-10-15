@@ -8,6 +8,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
+    byebug (9.0.5)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
@@ -35,8 +36,13 @@ GEM
     json (1.8.3)
     launchy (2.4.3)
       addressable (~> 2.3)
+    little-plugger (1.1.4)
+    logging (2.1.0)
+      little-plugger (~> 1.1)
+      multi_json (~> 1.10)
     minitest (5.8.4)
     mqtt (0.4.0)
+    multi_json (1.12.1)
     multipart-post (2.0.0)
     oj (2.14.3)
     rack (1.6.4)
@@ -87,6 +93,8 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
+  byebug
+  logging
   mqtt
   rack-test
   rspec

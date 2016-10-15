@@ -13,7 +13,7 @@ module Rubot
       commands BEER_STATUS_COMMANDS do |client, data, _|
         user = client.users[data.user]
 
-        puts "Toilet status request from #{user.profile.email}"
+        Rubot.logger.info "Toilet status request from #{user.profile.email}"
 
         send_toilet_response client, data
       end
@@ -22,12 +22,9 @@ module Rubot
         sensors = HttpRequests.get_json("#{Rubot.secrets[:optimus_url]}/status")
         is_free = sensors['distance'] < FREE_SENSOR_VALUE
 
-        p sensors
-
         client.say channel: data.channel, text: is_free ? 'Свободно е' : 'Заето е, стискай'
       rescue HttpRequests::RemoteError => error
-        puts 'Error getting throne sensor value'
-        p error
+        Rubot.logger.error 'Error getting throne sensor value', error
 
         client.say channel: data.channel, text: 'Няма връзка с кенефа!'
       end

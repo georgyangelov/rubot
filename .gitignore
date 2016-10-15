@@ -1,3 +1,4 @@
 /config/secrets.yml
 /data
 /log
+/.byebug_history

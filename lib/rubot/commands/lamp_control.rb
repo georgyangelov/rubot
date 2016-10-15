@@ -37,15 +37,14 @@ module Rubot
           lamps = HttpRequests.get_json(url)
           lamp_updates = lamps.map { |lamp_id| [lamp_id, switch_on] }.to_h
 
-          puts "Lamp update request from #{email}: #{lamp_updates.inspect}"
+          Rubot.logger.info "Lamp update request from #{email}: #{lamp_updates.inspect}"
 
           set_lamps lamp_updates
 
           client.say channel: data.channel,
                      text: Response.ok
         rescue HttpRequests::RemoteError => error
-          puts 'Error getting lamps for email'
-          p error
+          Rubot.logger.error "Error getting lamps for #{email}", error
 
           client.say channel: data.channel,
                      text: 'Не знам кои са твоите лампи, няма те в Humpty с този email'

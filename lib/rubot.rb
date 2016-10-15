@@ -2,8 +2,7 @@ require 'slack-ruby-bot'
 require 'yaml'
 require 'mqtt'
 require 'active_support/all'
-
-require 'logger'
+require 'logging'
 
 require 'rubot/lib/deep_freeze'
 
@@ -26,21 +25,73 @@ require 'rubot/listeners/when_did_you_come'
 module Rubot
   cattr_accessor :command_descriptions
 
+  def self.logger
+    @logger ||= begin
+
+      log_layout = Logging::Layouts.pattern(pattern: "%d %-5l -- %m\n")
+
+      logger = Logging::Logger.new('rubot')
+      logger.add_appenders(
+        Logging.appenders.stdout(layout: log_layout),
+        Logging.appenders.rolling_file(
+          "#{root}/log/#{environment}.log",
+          roll_by: :date,
+          age: 'weekly',
+          layout: log_layout
+        )
+      )
+      logger.level = config[:log_level]
+      logger
+    end
+  end
+
   def self.root
-    File.join(File.dirname(__FILE__), '..')
+    @root ||= File.join(File.dirname(__FILE__), '..')
   end
 
   def self.environment
-    env = ENV['RACK_ENV'] || 'development'
-    valid_env = %w(development production test).include? env
+    @environment ||= begin
+      env = ENV['RACK_ENV'] || 'development'
+      valid = %w(development production test).include? env
 
-    raise "Unknown environment #{env}" unless valid_env
+      raise "Unknown environment #{env}" unless valid
 
-    env
+      env
+    end
   end
 
-  def self.log_location
-    "#{root}/log/#{environment}.log"
+  def self.memory
+    @memory ||= Memory.new(File.join(root, 'data', 'memory.yml'))
+  end
+
+  def self.remember(channel = nil)
+    if channel
+      yield memory.for_channel(channel)
+    else
+      yield memory
+    end
+
+    memory.save
+  end
+
+  def self.config
+    @config ||= begin
+      config = YAML.load_file(File.join(root, 'config', 'rubot.yml'))
+
+      raise "No config specified for #{environment}" unless config[environment]
+
+      config[environment].deep_freeze.with_indifferent_access
+    end
+  end
+
+  def self.secrets
+    @secrets ||= begin
+      secrets = YAML.load_file(File.join(root, 'config', 'secrets.yml'))
+
+      raise "No secrets specified for #{environment}" unless secrets[environment]
+
+      secrets[environment].deep_freeze.with_indifferent_access
+    end
   end
 end
 
@@ -70,38 +121,6 @@ module SlackRubyBot
   end
 end
 
-module Rubot
-  def self.memory
-    @memory ||= Memory.new(File.join(root, 'data', 'memory.yml'))
-  end
-
-  def self.remember(channel = nil)
-    if channel
-      yield memory.for_channel(channel)
-    else
-      yield memory
-    end
-
-    memory.save
-  end
-
-  def self.config
-    @config ||= begin
-      config = YAML.load_file(File.join(root, 'config', 'rubot.yml'))
-
-      config.deep_freeze.with_indifferent_access
-    end
-  end
-
-  def self.secrets
-    @secrets ||= begin
-      secrets = YAML.load_file(File.join(root, 'config', 'secrets.yml'))
-
-      raise "No secrets specified for #{environment}" unless secrets[environment]
-
-      secrets[environment].deep_freeze.with_indifferent_access
-    end
-  end
-end
-
 ENV['SLACK_API_TOKEN'] = Rubot.secrets[:slack][:token]
+
+require 'byebug' if Rubot.environment != 'production'

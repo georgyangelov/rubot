@@ -22,7 +22,7 @@ module Rubot
       command BEER_STATUS_COMMAND do |client, data, _|
         user = client.users[data.user]
 
-        puts "Beer status request from #{user.profile.email}"
+        Rubot.logger.info "Beer status request from #{user.profile.email}"
 
         send_response client, data, 'left', BEER_SCALE
       end
@@ -31,7 +31,7 @@ module Rubot
       command VODKA_STATUS_COMMAND do |client, data, _|
         user = client.users[data.user]
 
-        puts "Vodka status request from #{user.profile.email}"
+        Rubot.logger.info "Vodka status request from #{user.profile.email}"
 
         send_response client, data, 'right', VODKA_SCALE
       end
@@ -42,8 +42,7 @@ module Rubot
 
         client.say channel: data.channel, text: response
       rescue HttpRequests::RemoteError => error
-        puts 'Error getting sensor values'
-        p error
+        Rubot.logger.error 'Error getting sensor values', error
 
         client.say channel: data.channel, text: 'Няма връзка с хладилника!'
       end
