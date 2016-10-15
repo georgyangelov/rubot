@@ -2,9 +2,9 @@ module Rubot
   class Bot < SlackRubyBot::Bot
     def self.names(channel = nil)
       if channel
-        Rubot::CONFIG['aliases'] | (Rubot.memory.for_channel(channel)[:aliases] || [])
+        Rubot.config[:aliases] | (Rubot.memory.for_channel(channel)[:aliases] || [])
       else
-        Rubot::CONFIG['aliases']
+        Rubot.config[:aliases]
       end
     end
 

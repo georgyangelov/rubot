@@ -86,6 +86,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   mqtt
   rack-test
   rspec

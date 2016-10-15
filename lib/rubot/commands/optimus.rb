@@ -19,7 +19,7 @@ module Rubot
       end
 
       def self.send_toilet_response(client, data)
-        sensors = HttpRequests.get_json("#{Rubot::SECRETS['optimus_url']}/status")
+        sensors = HttpRequests.get_json("#{Rubot.secrets[:optimus_url]}/status")
         is_free = sensors['distance'] < FREE_SENSOR_VALUE
 
         p sensors

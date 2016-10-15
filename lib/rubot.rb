@@ -1,18 +1,11 @@
 require 'slack-ruby-bot'
 require 'yaml'
 require 'mqtt'
+require 'active_support/all'
 
-class Array
-  def deep_freeze
-    map do |element|
-      if element.respond_to? :deep_freeze
-        element.deep_freeze
-      else
-        element.freeze
-      end
-    end.freeze
-  end
-end
+require 'logger'
+
+require 'rubot/lib/deep_freeze'
 
 require 'rubot/version'
 
@@ -32,6 +25,23 @@ require 'rubot/listeners/when_did_you_come'
 
 module Rubot
   cattr_accessor :command_descriptions
+
+  def self.root
+    File.join(File.dirname(__FILE__), '..')
+  end
+
+  def self.environment
+    env = ENV['RACK_ENV'] || 'development'
+    valid_env = %w(development production test).include? env
+
+    raise "Unknown environment #{env}" unless valid_env
+
+    env
+  end
+
+  def self.log_location
+    "#{root}/log/#{environment}.log"
+  end
 end
 
 require 'rubot/commands/help'
@@ -61,10 +71,6 @@ module SlackRubyBot
 end
 
 module Rubot
-  def self.root
-    File.join(File.dirname(__FILE__), '..')
-  end
-
   def self.memory
     @memory ||= Memory.new(File.join(root, 'data', 'memory.yml'))
   end
@@ -79,8 +85,23 @@ module Rubot
     memory.save
   end
 
-  SECRETS = YAML.load_file(File.join(root, 'config', 'secrets.yml'))
-  CONFIG  = YAML.load_file(File.join(root, 'config', 'rubot.yml'))
+  def self.config
+    @config ||= begin
+      config = YAML.load_file(File.join(root, 'config', 'rubot.yml'))
+
+      config.deep_freeze.with_indifferent_access
+    end
+  end
+
+  def self.secrets
+    @secrets ||= begin
+      secrets = YAML.load_file(File.join(root, 'config', 'secrets.yml'))
+
+      raise "No secrets specified for #{environment}" unless secrets[environment]
+
+      secrets[environment].deep_freeze.with_indifferent_access
+    end
+  end
 end
 
-ENV['SLACK_API_TOKEN'] = Rubot::SECRETS['slack']['token']
+ENV['SLACK_API_TOKEN'] = Rubot.secrets[:slack][:token]

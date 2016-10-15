@@ -1,6 +1,6 @@
 module CommandHelpers
   def stub_aliases
-    Rubot::CONFIG['aliases'] = ['бот', 'боте']
+    Rubot.config[:aliases] = ['бот', 'боте']
   end
 
   def tell(command, channel: 'channel', **options)

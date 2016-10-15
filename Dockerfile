@@ -8,4 +8,6 @@ RUN bundle install --without=test
 
 COPY . /rubot
 
+ENV RACK_ENV production
+
 CMD ["bundle", "exec", "bin/rubot"]

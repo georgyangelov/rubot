@@ -37,7 +37,7 @@ module Rubot
       end
 
       def self.send_response(client, data, sensor, scale)
-        sensors  = HttpRequests.get_json("#{Rubot::SECRETS['beer_mcu_url']}/status")
+        sensors  = HttpRequests.get_json("#{Rubot.secrets[:beer_mcu_url]}/status")
         response = response_for_sensor_value(scale, sensors[sensor])
 
         client.say channel: data.channel, text: response

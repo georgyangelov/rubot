@@ -26,14 +26,14 @@ module Rubot
       end
 
       def self.set_lamps(updates)
-        MQTT::Client.connect(Rubot::SECRETS['mqtt']) do |c|
+        MQTT::Client.connect(Rubot.secrets[:mqtt].symbolize_keys) do |c|
           c.publish('shadow/set', updates.to_json)
         end
       end
 
       def self.set_lamps_for_email(client, data, email, switch_on)
         begin
-          url = "#{Rubot::SECRETS['humpty_url']}/api/employees/#{email}/switches"
+          url = "#{Rubot.secrets[:humpty_url]}/api/employees/#{email}/switches"
           lamps = HttpRequests.get_json(url)
           lamp_updates = lamps.map { |lamp_id| [lamp_id, switch_on] }.to_h
 
