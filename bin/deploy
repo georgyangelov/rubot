@@ -1,11 +1,11 @@
 #!/bin/sh
-docker stop rubot
-docker rm rubot
+docker stop santa-bot
+docker rm santa-bot
 
-docker build -t rubot .
+docker build -t santa-bot .
 docker run -d \
     --restart=on-failure:3 \
-    -v /home/astea/rubot/data:/rubot/data \
-    -v /home/astea/rubot/log:/rubot/log \
-    --name rubot \
-    rubot
+    -v /home/astea/santa-bot/data:/santa-bot/data \
+    -v /home/astea/santa-bot/log:/santa-bot/log \
+    --name santa-bot \
+    santa-bot

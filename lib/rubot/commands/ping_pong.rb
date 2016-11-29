@@ -19,6 +19,7 @@ module Rubot
         client.say channel: data.channel, text: 'К\'во да става бе човек...'
       end
 
+      # TODO: Santa responses
       HOW_ARE_YOU_RESPONSES = [
         'Аз съм бот бе човек, как може да съм.',
         'Горе-долу...',
@@ -32,6 +33,7 @@ module Rubot
         client.say channel: data.channel, text: HOW_ARE_YOU_RESPONSES.sample
       end
 
+      # TODO: Santa responses
       WHAT_ARE_YOU_DOING_RESPONSES = [
         'Аз съм бот бе човек, какво може да правя.',
         'Бича айляк',
@@ -48,7 +50,8 @@ module Rubot
         client.say channel: data.channel, text: WHAT_ARE_YOU_DOING_RESPONSES.sample
       end
 
-      INTRODUCE_YOURSELF_RESPONSE = 'Здравейте ^_^ Аз съм Рубот, ' \
+      # TODO: Santa responses
+      INTRODUCE_YOURSELF_RESPONSE = 'Здравейте ^_^ Аз съм Дядо Коледа, ' \
         'но може да ми викате %s. ' \
         'За повече информация ме питайте за помощ (`<име>, хелп?`).'.freeze
 

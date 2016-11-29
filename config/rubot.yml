@@ -2,8 +2,8 @@ default: &default
   log_level: debug
 
   aliases:
-    - майсторе
-    - баце
+    - дядо
+    - дядо Коледа
 
 test:
   <<: *default

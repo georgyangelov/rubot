@@ -5,6 +5,7 @@ module Rubot
       ARE_YOU_HERE_COMMAND = /(тука? ли си|тук\?)/i.freeze
       UNKNOWN_COMMAND = /(?<command>.*)/i.freeze
 
+      # TODO: Santa responses
       NO_COMMAND_RESPONSES = [
         'Тук съм.',
         'Тук съм, споко.',
@@ -16,6 +17,7 @@ module Rubot
         'ZZZzzzzzz... А? Кой смее да ме буди от вечния ми сън?',
       ].deep_freeze
 
+      # TODO: Santa responses
       UNKNOWN_COMMAND_RESPONSES = [
         'Какво трябва да значи `%s`?',
         'Не го разбирам това твоето `%s`',
