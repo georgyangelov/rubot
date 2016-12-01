@@ -3,6 +3,14 @@ module CommandHelpers
     Rubot.config[:aliases] = ['бот', 'боте']
   end
 
+  def stub_user
+    i_am 'user'
+  end
+
+  def i_am(username, email = 'gmail@gangelov.net')
+    @user = double(name: username, email: email)
+  end
+
   def tell(command, channel: 'channel', **options)
     ask command, channel: channel, **options
     expect_ok_answer channel: channel
@@ -16,9 +24,12 @@ module CommandHelpers
       @message = [channel, text]
     end
 
+    allow(client).to receive(:users).and_return({@user.name => @user})
+    allow(client).to receive(:channels).and_return({channel => channel})
+
     command = "боте, #{command}" if prefix
 
-    Rubot::Bot.instance.send(:message, client, text: command, channel: channel, user: 'user')
+    Rubot::Bot.instance.send(:message, client, text: command, channel: channel, user: @user.name)
   end
 
   def expect_answer(expected_response, params = '', channel: 'channel')
@@ -47,5 +58,8 @@ end
 RSpec.configure do |c|
   c.include CommandHelpers
 
-  c.before(:each) { stub_aliases }
+  c.before(:each) do
+    stub_aliases
+    stub_user
+  end
 end

@@ -10,10 +10,12 @@ module Rubot
 
           yield client, data, match
         rescue StandardError => error
+          raise if Rubot.environment == 'test'
+
           client.say channel: data.channel,
                      text: Response.error(error.message)
 
-          Rubot.logger.error 'Unknown error while handling message', error
+          Rubot.logger.error "Unknown error while handling message: #{error}"
         end
       end
     end
