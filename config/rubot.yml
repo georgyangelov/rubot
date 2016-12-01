@@ -8,7 +8,7 @@ default: &default
 test:
   <<: *default
 
-  log_level: debug
+  log_level: fatal
   aliases:
 
 development:
