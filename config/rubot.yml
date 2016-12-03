@@ -3,7 +3,10 @@ default: &default
 
   aliases:
     - дядо
+    # TODO: Fix this alias
     - дядо Коледа
+
+  timezone: Europe/Sofia
 
 test:
   <<: *default

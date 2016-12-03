@@ -98,6 +98,7 @@ end
 require 'rubot/commands/help'
 require 'rubot/commands/alias'
 require 'rubot/commands/ping_pong'
+require 'rubot/commands/santa_wishes'
 require 'rubot/commands/unknown'
 
 module SlackRubyBot
@@ -119,3 +120,5 @@ end
 ENV['SLACK_API_TOKEN'] = Rubot.secrets[:slack][:token]
 
 require 'byebug' if Rubot.environment != 'production'
+
+Time.zone_default = Time.find_zone!(Rubot.config[:timezone])
