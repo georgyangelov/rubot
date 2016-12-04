@@ -95,6 +95,7 @@ module Rubot
   end
 end
 
+require 'rubot/commands/admin'
 require 'rubot/commands/help'
 require 'rubot/commands/alias'
 require 'rubot/commands/ping_pong'

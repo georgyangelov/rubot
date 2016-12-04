@@ -4,6 +4,12 @@ default: &default
   aliases:
     - дядо
 
+  admins:
+    - gangelov
+    - marinadm
+    - kpetrova
+    - boyan
+
   timezone: Europe/Sofia
 
 test:

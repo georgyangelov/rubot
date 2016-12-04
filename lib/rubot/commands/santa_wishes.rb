@@ -2,10 +2,10 @@ module Rubot
   module Commands
     class SantaWishes < Rubot::Command
       MAKE_A_WISH_PATTERNS = [
-        /пожелавам си/,
-        /искам/,
-        /донеси ми/,
-        /подари ми/,
+        /пожелавам си/i,
+        /искам/i,
+        /донеси ми/i,
+        /подари ми/i,
       ].map { |pattern| /#{pattern} (?<present>.+)/i }.deep_freeze
 
       WISH_RESPONSES = [

@@ -18,7 +18,7 @@ module Rubot
         'Винаги се чувствам прекрасно на Коледа!',
       ].deep_freeze
 
-      desc 'как си', 'Трябва да се интересуваме от приятелите си.'
+      desc 'Как си?', 'Трябва да се интересуваме от приятелите си.'
       command(/Как си?/i) do |client, data, _|
         client.say channel: data.channel, text: HOW_ARE_YOU_RESPONSES.sample
       end
@@ -32,15 +32,17 @@ module Rubot
         client.say channel: data.channel, text: WHAT_ARE_YOU_DOING_RESPONSES.sample
       end
 
-      INTRODUCE_YOURSELF_RESPONSE = 'Дядо Коледа Хо-хо-хо!'
-
-      desc 'Кой си ти?', ''
+      desc 'Представи се!', ''
       command(/(представи се|кой си( ти)?)/i) do |client, data, _|
-        names = Rubot::Bot.names(data.channel)
-        natural_names = Rubot::NaturalLists.construct(names)
+        client.say channel: data.channel, text: <<-TEXT.strip_heredoc
+          Аз съм Астейският Дядо Коледа. Мога и Дядо Мраз да бъда, както предпочиташ.
 
-        client.say channel: data.channel,
-                   text: INTRODUCE_YOURSELF_RESPONSE % natural_names
+          Сигурно си отвикнал да пишеш писма до мен, може и дори да си решил, че не съществувам..
+          Е, какво пък..пожелай си нещо, пък да видим.
+          Може да се окаже, че през цялото време съм седял на съседно до теб бюро.
+
+          Напиши "подарък" или "чорап" и ще ти кажа какво мога да правя.
+        TEXT
       end
 
       desc 'Кой те праща?', ''
