@@ -2,15 +2,10 @@ module Rubot
   module Commands
     class PingPong < Rubot::Command
       HELLO_RESPONSES = [
-        'Здравей ^_^',
-        'Здрасти ^_^',
-        'Привет ^_^',
-        'К\'во става',
-        'Йо',
-        'Хай ^_^',
+        'Хо-хо-хо!'
       ].deep_freeze
 
-      desc 'здравей', 'Поздрав. Трябва да сме учтиви.'
+      desc 'Здравей', 'Поздрав. Трябва да сме учтиви.'
       command(/(здравей|здрасти|привет|хай|hi|йо|yo)/i) do |client, data, _|
         client.say channel: data.channel, text: HELLO_RESPONSES.sample
       end
@@ -19,43 +14,27 @@ module Rubot
         client.say channel: data.channel, text: 'К\'во да става бе човек...'
       end
 
-      # TODO: Santa responses
       HOW_ARE_YOU_RESPONSES = [
-        'Аз съм бот бе човек, как може да съм.',
-        'Горе-долу...',
-        'Бивам',
-        'Добре съм, ям рам и спя по цял ден. Райски живот си живея направо.',
-        'А ти нямаш ли си работа?',
+        'Винаги се чувствам прекрасно на Коледа!',
       ].deep_freeze
 
       desc 'как си', 'Трябва да се интересуваме от приятелите си.'
-      command(/как си/i) do |client, data, _|
+      command(/Как си?/i) do |client, data, _|
         client.say channel: data.channel, text: HOW_ARE_YOU_RESPONSES.sample
       end
 
-      # TODO: Santa responses
       WHAT_ARE_YOU_DOING_RESPONSES = [
-        'Аз съм бот бе човек, какво може да правя.',
-        'Бича айляк',
-        'Ям рам. Остави ме намира',
-        'Въртя си харда за кеф',
-        'Пържа си яйца на процесора',
-        'Гледам клипчета в YouTube',
-        'А ти нямаш ли си работа?',
-        'Чакам някой да се сети да ми даде работа',
+        'Разнасям подаръци!',
       ].deep_freeze
 
-      desc 'какво правиш', 'Какъв ли е ботския живот?'
+      desc 'Какво правиш?', ''
       command(/(к'?во|какво) правиш/i) do |client, data, _|
         client.say channel: data.channel, text: WHAT_ARE_YOU_DOING_RESPONSES.sample
       end
 
-      # TODO: Santa responses
-      INTRODUCE_YOURSELF_RESPONSE = 'Здравейте ^_^ Аз съм Дядо Коледа, ' \
-        'но може да ми викате %s. ' \
-        'За повече информация ме питайте за помощ (`<име>, хелп?`).'.freeze
+      INTRODUCE_YOURSELF_RESPONSE = 'Дядо Коледа Хо-хо-хо!'
 
-      desc 'представи се', ''
+      desc 'Кой си ти?', ''
       command(/(представи се|кой си( ти)?)/i) do |client, data, _|
         names = Rubot::Bot.names(data.channel)
         natural_names = Rubot::NaturalLists.construct(names)
@@ -64,9 +43,44 @@ module Rubot
                    text: INTRODUCE_YOURSELF_RESPONSE % natural_names
       end
 
-      desc 'кажи нещо', 'Казва нещо.'
+      desc 'Кой те праща?', ''
+      command(/кой си( ти)?|кой те (из)?праща/i) do |client, data, _|
+        client.say channel: data.channel, text: 'Коледния отряд'
+      end
+
       command(/кажи нещо/i) do |client, data, _|
         client.say channel: data.channel, text: 'нещо'
+      end
+
+      JOKES = [
+        'Еврейският дядо Коледа: - Здравейте, дечица... Купете подаръци!',
+
+        <<-JOKE.strip_heredoc,
+          Дете на програмист пита баща си:
+          - Тате, Дядо Коледа как побира в чувала подаръците за всички деца по света?
+          - С Win Zip, моето момче.
+        JOKE
+
+        <<-JOKE.strip_heredoc,
+          Заглавие в македонските вестници:
+          - Прелитайки над Македония за празниците дядо Коледа макар и за малко отново ще си бъде вкъщи.
+        JOKE
+
+        <<-JOKE.strip_heredoc,
+          В навечерието на Коледа мъж се клатушка по улицата, носейки елхичка.
+          Една възрастна дама го вижда и с изумление казва:
+          - Как не ви е срам по Коледа да се напивате, а да не стоите при семейството си?
+          - И на мен ми се иска да се прибера, но не знам как да се измъкна от тази гора!
+        JOKE
+
+        <<-JOKE.strip_heredoc,
+          Как се нарича човек, който мрази старци? Дядо Мраз.
+        JOKE
+      ].deep_freeze
+
+      desc 'Кажи ми виц', ''
+      command(/кажи( ми)?( друга?)? (шега|виц|смешка)/i) do |client, data, _|
+        client.say channel: data.channel, text: JOKES.sample
       end
     end
   end

@@ -6,7 +6,6 @@ module Rubot
         /[щшк]е те наричаме? (?<new_name>[[:alnum]]+)/i,
       ].deep_freeze
 
-      desc 'ще ти викам <име> | ще те наричам <име>', 'Започва да отговаря на това име.'
       commands ALIAS_REGEXPS do |client, data, match|
         Rubot.remember(data.channel) do |memory|
           memory[:aliases] ||= []
