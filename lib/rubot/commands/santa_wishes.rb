@@ -17,7 +17,7 @@ module Rubot
       ].deep_freeze
 
       # TODO: Descriptions
-      desc 'пожелавам си ...', ''
+      desc 'пожелавам си <желание>', 'Пожелай си нещо :)'
       commands MAKE_A_WISH_PATTERNS do |client, data, match|
         username = client.users[data.user].name
 
@@ -29,7 +29,6 @@ module Rubot
         client.say channel: data.channel, text: WISH_RESPONSES.sample
       end
 
-      # TODO: Descriptions
       desc 'изненадай ме', 'Остави на Дядо Коледа да избере подаръка'
       command(/изненадай ме/) do |client, data, match|
         username = client.users[data.user].name
