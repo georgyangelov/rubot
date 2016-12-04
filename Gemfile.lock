@@ -128,8 +128,8 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   byebug
-  logging
   google-api-client
+  logging
   mqtt
   rack-test
   rspec
