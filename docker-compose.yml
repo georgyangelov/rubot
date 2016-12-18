@@ -1,0 +1,8 @@
+version: '2'
+services:
+  rubot:
+    build: .
+    volumes:
+      - /home/gangelov/rubot/data:/rubot/data
+      - /home/gangelov/rubot/log:/rubot/log
+    restart: unless-stopped

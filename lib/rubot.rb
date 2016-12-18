@@ -18,7 +18,8 @@ require 'rubot/listener'
 require 'rubot/command'
 require 'rubot/response'
 
-require 'rubot/http_requests'
+require 'rubot/services/http_service'
+require 'rubot/services/lamp_control_service'
 
 require 'rubot/listeners/when_did_you_come'
 

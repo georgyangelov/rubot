@@ -37,11 +37,11 @@ module Rubot
       end
 
       def self.send_response(client, data, sensor, scale)
-        sensors  = HttpRequests.get_json("#{Rubot.secrets[:beer_mcu_url]}/status")
+        sensors  = HttpService.get_json("#{Rubot.secrets[:beer_mcu_url]}/status")
         response = response_for_sensor_value(scale, sensors[sensor])
 
         client.say channel: data.channel, text: response
-      rescue HttpRequests::RemoteError => error
+      rescue HttpService::RemoteError => error
         Rubot.logger.error 'Error getting sensor values', error
 
         client.say channel: data.channel, text: 'Няма връзка с хладилника!'

@@ -8,7 +8,7 @@ module CommandHelpers
   end
 
   def i_am(username, email = 'gmail@gangelov.net')
-    @user = double(name: username, email: email)
+    @user = double(name: username, profile: double(email: email))
   end
 
   def tell(command, channel: 'channel', **options)
