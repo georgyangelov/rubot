@@ -2,21 +2,21 @@ module Rubot
   module Commands
     class LampControl < Rubot::Command
       ON_COMMANDS = [
-        /(светни|пусни)( ми)?( ламп(ите|ата))?( (в|на) (?<room>.+))/i
+        /(светни|пусни)( ми)?( ламп(ите|ата))?( (в|на) (?<room>.+?))/i
       ].deep_freeze
 
       OFF_COMMANDS = [
-        /((у|из|за)гаси|изключи|спри)( ми)?( ламп(ите|ата))?( (в|на) (?<room>.+))/i
+        /((у|из|за)гаси|изключи|спри)( ми)?( ламп(ите|ата))?( (в|на) (?<room>.+?))/i
       ].deep_freeze
 
-      desc 'светни в <стая>', 'Светка лампите в стаята'
+      desc 'Светни в <име на стая>', 'Светка лампите в стаята.'
       commands ON_COMMANDS do |client, data, match|
         user = client.users[data.user]
 
         set_lamp_ids_for_room client, data, user, match[:room], true
       end
 
-      desc 'изключи лампите в <стая>', 'Спира лампите в стаята'
+      desc 'Изгаси в <име на стая>', 'Спира лампите в стаята.'
       commands OFF_COMMANDS do |client, data, match|
         user = client.users[data.user]
 
@@ -29,7 +29,7 @@ module Rubot
 
         unless room_light_ids
           client.say channel: data.channel,
-                     text: "Нямам данни за стаята #{room_name}. Провери дали името е написано правилно"
+                     text: "Нямам данни за стаята `#{room_name}`. Провери дали името е написано правилно"
           return
         end
 

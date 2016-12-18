@@ -18,7 +18,7 @@ module Rubot
         'Някой е сложил диня на сензора!' => 2000,
       }.freeze
 
-      desc 'има ли бира', 'Казва дали има бира'
+      desc 'Има ли бира?', 'Казва дали има бира.'
       command BEER_STATUS_COMMAND do |client, data, _|
         user = client.users[data.user]
 
@@ -27,7 +27,7 @@ module Rubot
         send_response client, data, 'left', BEER_SCALE
       end
 
-      desc 'има ли водка', 'Казва дали има водка'
+      desc 'Има ли водка?', 'Казва дали има водка.'
       command VODKA_STATUS_COMMAND do |client, data, _|
         user = client.users[data.user]
 

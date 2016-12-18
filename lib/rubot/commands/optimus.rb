@@ -9,14 +9,14 @@ module Rubot
 
       FREE_SENSOR_VALUE = 200
 
-      desc 'свободна ли е тоалетната', 'Казва дали има някой на трона'
-      commands BEER_STATUS_COMMANDS do |client, data, _|
-        user = client.users[data.user]
-
-        Rubot.logger.info "Toilet status request from #{user.profile.email}"
-
-        send_toilet_response client, data
-      end
+      # desc 'Свободна ли е тоалетната', 'Казва дали има някой на трона'
+      # commands BEER_STATUS_COMMANDS do |client, data, _|
+      #   user = client.users[data.user]
+      #
+      #   Rubot.logger.info "Toilet status request from #{user.profile.email}"
+      #
+      #   send_toilet_response client, data
+      # end
 
       def self.send_toilet_response(client, data)
         sensors = HttpService.get_json("#{Rubot.secrets[:optimus_url]}/status")

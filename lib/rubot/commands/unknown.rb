@@ -27,7 +27,6 @@ module Rubot
           'беден бот и не разбирам какво ми казвате. `%s` за мен не означава нищо.',
       ].deep_freeze
 
-      desc '<без команда>', 'Потвърждава, че е буден.'
       command NO_COMMAND do |client, data, _|
         client.say channel: data.channel,
                    text: NO_COMMAND_RESPONSES.sample

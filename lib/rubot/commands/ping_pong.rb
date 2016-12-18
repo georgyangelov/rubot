@@ -10,7 +10,7 @@ module Rubot
         'Хай ^_^',
       ].deep_freeze
 
-      desc 'здравей', 'Поздрав. Трябва да сме учтиви.'
+      desc 'Здравей', 'Поздрав. Трябва да сме учтиви.'
       command(/(здравей|здрасти|привет|хай|hi|йо|yo)/i) do |client, data, _|
         client.say channel: data.channel, text: HELLO_RESPONSES.sample
       end
@@ -27,7 +27,7 @@ module Rubot
         'А ти нямаш ли си работа?',
       ].deep_freeze
 
-      desc 'как си', 'Трябва да се интересуваме от приятелите си.'
+      desc 'Как си?', 'Трябва да се интересуваме от приятелите си.'
       command(/как си/i) do |client, data, _|
         client.say channel: data.channel, text: HOW_ARE_YOU_RESPONSES.sample
       end
@@ -43,7 +43,7 @@ module Rubot
         'Чакам някой да се сети да ми даде работа',
       ].deep_freeze
 
-      desc 'какво правиш', 'Какъв ли е ботския живот?'
+      desc 'Какво правиш?', 'Какъв ли е ботския живот?'
       command(/(к'?во|какво) правиш/i) do |client, data, _|
         client.say channel: data.channel, text: WHAT_ARE_YOU_DOING_RESPONSES.sample
       end
@@ -52,7 +52,7 @@ module Rubot
         'но може да ми викате %s. ' \
         'За повече информация ме питайте за помощ (`<име>, хелп?`).'.freeze
 
-      desc 'представи се', ''
+      desc 'Представи се', ''
       command(/(представи се|кой си( ти)?)/i) do |client, data, _|
         names = Rubot::Bot.names(data.channel)
         natural_names = Rubot::NaturalLists.construct(names)
@@ -61,7 +61,7 @@ module Rubot
                    text: INTRODUCE_YOURSELF_RESPONSE % natural_names
       end
 
-      desc 'кажи нещо', 'Казва нещо.'
+      desc 'Кажи нещо', 'Казва нещо.'
       command(/кажи нещо/i) do |client, data, _|
         client.say channel: data.channel, text: 'нещо'
       end

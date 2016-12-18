@@ -4,20 +4,18 @@ module Rubot
       COMMAND = /(помощ|помогни( ми)?|хелп|help)/i
       COMMAND_CODE = /(къде ти е кода|дай( си)? кода)/i
 
-      desc 'помощ', 'Принтира това съобщение'
       command COMMAND do |client, data, _|
         help = Rubot.command_descriptions.map do |(command, text)|
-          "`#{command}` - #{text}"
+          "#{command.ljust(25)} - #{text}"
         end.join("\n")
 
-        client.say channel: data.channel,
-                   text: help
+        client.say channel: data.channel, text: "Ето какво мога: \n\n```#{help}```"
       end
 
-      desc 'къде ти е код(а|ът)', 'Дава линк към репото си'
+      desc 'Къде ти е кодът?', 'Дава линк към репото си'
       command COMMAND_CODE do |client, data, _|
         client.say channel: data.channel,
-                   text: 'https://github.com/stormbreakerbg/rubot'
+                   text: 'https://github.com/georgyangelov/rubot'
       end
     end
   end
