@@ -2,7 +2,7 @@ module Rubot
   module Commands
     class LampControl < Rubot::Command
       ON_COMMANDS = [
-        /(светни|пусни)( ми)?( ламп(ите|ата))?( (в|във|на))? (?<room>.+?)/i
+        /(включи|светни|пусни)( ми)?( ламп(ите|ата))?( (в|във|на))? (?<room>.+?)/i
       ].deep_freeze
 
       OFF_COMMANDS = [
