@@ -11,6 +11,8 @@ RSpec.describe Rubot::Commands::LampControl do
   end
 
   it_behaves_like 'a lamp switch command', 'светни в Берлин', [20, 21], true
+  it_behaves_like 'a lamp switch command', 'светни във Берлин', [20, 21], true
+  it_behaves_like 'a lamp switch command', 'светни Берлин', [20, 21], true
   it_behaves_like 'a lamp switch command', 'светни в ПАРИЖ', [5], true
   it_behaves_like 'a lamp switch command', 'пусни лампите в Ню Йорк', [22, 23], true
   it_behaves_like 'a lamp switch command', 'светни ми в София', [0, 1, 2, 3, 4], true
@@ -21,6 +23,8 @@ RSpec.describe Rubot::Commands::LampControl do
   it_behaves_like 'a lamp switch command', 'светни на балкона.', [28, 29], true
 
   it_behaves_like 'a lamp switch command', 'угаси в Берлин', [20, 21], false
+  it_behaves_like 'a lamp switch command', 'угаси във Берлин', [20, 21], false
+  it_behaves_like 'a lamp switch command', 'угаси Берлин', [20, 21], false
   it_behaves_like 'a lamp switch command', 'спри лампите в ПАРИЖ', [5], false
   it_behaves_like 'a lamp switch command', 'изгаси лампите в Ню Йорк', [22, 23], false
   it_behaves_like 'a lamp switch command', 'изгаси ми в София', [0, 1, 2, 3, 4], false
