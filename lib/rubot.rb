@@ -104,6 +104,7 @@ require 'rubot/commands/randomize_list'
 require 'rubot/commands/lamp_control'
 require 'rubot/commands/beer_meter'
 require 'rubot/commands/optimus'
+require 'rubot/commands/manners'
 require 'rubot/commands/unknown'
 
 module SlackRubyBot
