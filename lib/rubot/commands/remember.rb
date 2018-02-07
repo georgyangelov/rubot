@@ -32,7 +32,7 @@ module Rubot
         /(?<value>.+) не (е|са) (?<key>[[:alnum:]]+)/i,
       ].deep_freeze
 
-      desc '<елементи> не е/са <списък>', 'Добавя елементи към списък'
+      desc '<елементи> не е/са <списък>', 'Премахва елементи от списък'
       commands REMOVE_FROM_LIST_COMMANDS do |client, data, match|
         key = Rubot::KeyNormalizer.normalize(match[:key])
         value = Rubot::NaturalLists.parse(match[:value])
