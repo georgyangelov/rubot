@@ -5,7 +5,7 @@ docker rm santa-bot
 docker build -t santa-bot .
 docker run -d \
     --restart=on-failure:3 \
-    -v /home/astea/santa-bot/data:/santa-bot/data \
-    -v /home/astea/santa-bot/log:/santa-bot/log \
+    -v /home/astea/santa-bot-2018/data:/santa-bot/data \
+    -v /home/astea/santa-bot-2018/log:/santa-bot/log \
     --name santa-bot \
     santa-bot
